@@ -8,7 +8,9 @@ client = Client('http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl'
 #Functie voor VIESCHECK
 def wsdl_function(country,btwNo):
     result = client.service.checkVat(country, btwNo)
-    print(result['name'])
+    address1 = result['address']
+    address = address1.replace("\n","|")
+    outputlist.append([result['name'],address])
 
 
 #wsdl_function(btwCode)
@@ -26,3 +28,5 @@ with open('Importlines.csv', 'r', encoding="ISO-8859-1" ) as f: #delimeter zou e
 #Door de lijst wordt geloopt en de functie wordt gecalld
 for item in listofcode:
     wsdl_function(item[0],item[1])
+
+outputlist =  list()
