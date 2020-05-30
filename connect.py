@@ -5,10 +5,8 @@ client = Client('http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl'
 
 
 #Functie voor VIESCHECK
-def wsdl_function(btwNo):
-    country = btwNo[:2]
-    number= btwNo[2:]
-    result = client.service.checkVat(country, number)
+def wsdl_function(country,btwNo):
+    result = client.service.checkVat(country, btwNo)
     print(result['name'])
 
 
@@ -17,9 +15,9 @@ def wsdl_function(btwNo):
 
 #Een lijst wordt gecreeerd
 listofcode  = list()
-listofcode.append('NL148250749B01')
-listofcode.append('NL823764898B01')
+listofcode.append(['NL','808669291B01'])
+listofcode.append(['NL','823764898B01'])
 
 #Door de lijst wordt geloopt en de functie wordt gecalld
 for item in listofcode:
-    wsdl_function(item)
+    wsdl_function(item[0],item[1])
