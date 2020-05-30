@@ -11,7 +11,6 @@ def wsdl_function(country,btwNo):
     print(result['name'])
 
 
-
 #wsdl_function(btwCode)
 
 #Een lijst wordt gecreeerd
