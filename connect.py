@@ -43,8 +43,10 @@ with open('Importlines.csv', 'r', encoding="ISO-8859-1" ) as f: #delimeter zou e
 
 #listofcode.append(['NL','808669291B01'])
 #listofcode.append(['NL','823764898B01'])
-
+listlength = len(listofcode)
+j = 0
 #Door de lijst wordt geloopt en de functie wordt gecalld
 for item in listofcode:
     wsdl_function(item[0],item[1],item[2])
-
+    j += 1
+    print(j/listlength)
