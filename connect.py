@@ -4,13 +4,25 @@ import csv
 #Link naar WSDL schema
 client = Client('http://ec.europa.eu/taxation_customs/vies/checkVatService.wsdl')
 
-
+outputlist = list()
 #Functie voor VIESCHECK
 def wsdl_function(country,btwNo):
-    result = client.service.checkVat(country, btwNo)
-    address1 = result['address']
-    address = address1.replace("\n","|")
-    outputlist.append([result['name'],address])
+    i = 1
+    while True:
+        try:
+            result = client.service.checkVat(country, btwNo)
+            address1 = result['address']
+            address = address1.replace("\n", "|")
+            outputlist.append([result['name'], address])
+            i = 6
+        except:
+            i = i + 1
+            address = "-1"
+
+        if (i > 5):
+            break
+
+    print(address)
 
 
 #wsdl_function(btwCode)
@@ -29,4 +41,3 @@ with open('Importlines.csv', 'r', encoding="ISO-8859-1" ) as f: #delimeter zou e
 for item in listofcode:
     wsdl_function(item[0],item[1])
 
-outputlist =  list()
